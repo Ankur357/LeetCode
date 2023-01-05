@@ -6,10 +6,10 @@ class Solution {
     }
     private void combination(List<List<Integer>> ans, List<Integer> comb, int k,  int start, int n) {
 	if (comb.size() == k && n == 0) {
-		List<Integer> li = new ArrayList<Integer>(comb);
-		ans.add(li);
+		ans.add(new ArrayList<Integer>(comb));
 		return;
 	}
+    else if(k<0 || comb.size()==k ) return;
 	for (int i = start; i <= 9; i++) {
 		comb.add(i);
 		combination(ans, comb, k, i+1, n-i);
