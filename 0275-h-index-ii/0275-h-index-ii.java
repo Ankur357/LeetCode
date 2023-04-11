@@ -1,9 +1,18 @@
 class Solution {
     public int hIndex(int[] citations) {
-        int n = citations.length;
-        for(int i=0;i<n;i++){
-            if(n-i<=citations[i]) return n-i;
+        int l = 0;
+        int r = citations.length;
+        int n= citations.length;
+        int ans=0;
+        while(l<r){
+            int mid = l + (r-l)/2;
+            
+            if((n-mid)<=citations[mid]){
+                ans = Math.max(ans,n-mid);
+                r=mid;
+            }
+            else l= mid+1;
         }
-        return 0;
+        return ans;
     }
 }
