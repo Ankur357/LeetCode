@@ -31,16 +31,24 @@ class Geeks
 
 class Solution
 {
-    static int majorityElement(int a[], int size)
+    static int majorityElement(int arr[], int size)
     {
         // your code here
-        HashMap<Integer,Integer> map = new HashMap<>();
-        for(int i=0;i<size;i++){
-            map.put(a[i],map.getOrDefault(a[i],0)+1);
+        int count=0;
+        int element=0;
+        for(int i:arr){
+            if(count==0){
+                count=1;
+                element=i;
+            }
+            else if(i==element) count++;
+            else count--;
         }
-        for(int i: map.keySet()){
-            if(map.get(i)>(size/2)) return i;
+        int cnt1=0;
+        for(int i:arr){
+            if(i==element) cnt1++;
         }
+        if(cnt1>(size/2)) return element;
         return -1;
     }
 }
