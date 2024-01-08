@@ -3,11 +3,20 @@ class Solution {
         HashMap<Integer,Integer> map = new HashMap<>();
         int min = Integer.MAX_VALUE;
         int j=0;
+        int i=0;
         while(j<cards.length){
-            if(map.get(cards[j])!=null){
-                min = Math.min(min,j-map.get(cards[j])+1);
+            if(!map.containsKey(cards[j])){
+                map.put(cards[j],map.getOrDefault(cards[j],0)+1);
             }
-            map.put(cards[j],j);
+            else{
+                while(cards[i]!=cards[j]){
+                    map.remove(cards[i]);
+                    i++;
+                }
+                min = Math.min(min,j-i+1);
+                map.put(cards[j],j);
+                i++;
+            }
             j++;
         }
         return min==Integer.MAX_VALUE?-1:min;
